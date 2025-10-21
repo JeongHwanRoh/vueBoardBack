@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vueboard.mapper.BoardMapper">
+
+    <!-- 전체 게시글 목록 -->
+    <select id="getAllBoards" resultType="com.vueboard.entity.Board">
+        SELECT
+            BOARD_ID AS boardId,
+            TITLE,
+            CONTENT,
+            WRITER_ID AS writerId,
+            REGDATE,
+            VIEWCNT,
+            CATEGORY
+        FROM TB_BOARD
+        ORDER BY BOARD_ID DESC
+    </select>
+    
+    <!-- 특정 게시글 조회  -->
+    <select id="getBoardById" parameterType="long" resultType="com.vueboard.entity.Board">
+    
+    	 SELECT
+            BOARD_ID AS boardId,
+            TITLE,
+            CONTENT,
+            WRITER_ID AS writerId,
+            REGDATE,
+            VIEWCNT,
+            CATEGORY
+        FROM TB_BOARD
+        WHERE BOARD_ID=#{boardId}
+    
+    
+    </select>
+    
+    <!-- 게시글 등록  -->
+    <insert id="insertBoard" parameterType="com.vueboard.entity.Board">
+    
+    	INSERT INTO TB_BOARD
+    	(BOARD_ID, TITLE, CONTENT, WRITER_ID, REGDATE, VIEWCNT, CATEGORY)
+        VALUES (
+            SEQ_BOARD_ID.NEXTVAL,
+            #{title},
+            #{content},
+            #{writerId},
+            SYSDATE,
+            0,
+            #{category}
+        )
+    
+    </insert>
+    
+    <!--게시글 수정 -->
+    <update id="updateBoard" parameterType="com.vueboard.entity.Board">
+    
+    UPDATE TB_BOARD
+    SET TITLE=#{title},
+    CONTENT=#{content},
+    REGDATE=SYSDATE
+    WHERE BOARD_ID=#{boardId}
+    
+    </update>
+    
+    <!--게시글 삭제  -->
+    <delete id="deleteBoard" parameterType="long">
+    
+    	DELETE FROM TB_BOARD
+    	WHERE BOARD_ID=#{boardId}
+    </delete>
+
+</mapper>
