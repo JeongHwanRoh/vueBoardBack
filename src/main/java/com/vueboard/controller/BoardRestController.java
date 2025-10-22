@@ -15,7 +15,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/board")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true") // Vue 포트와 일치
+//@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true") // Vue 포트 허용(일반vue용)
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true") // Vue 포트 허용(Nuxt vue용)
 public class BoardRestController {
 
 	private final BoardService boardService;

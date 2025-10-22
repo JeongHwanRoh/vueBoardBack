@@ -13,6 +13,7 @@ public class userService {
 	
 	private final UserMapper userMapper;
 	
+	// 로그인
 	public User login(String memberId, String password) {
 		return userMapper.login(memberId, password);
 	}

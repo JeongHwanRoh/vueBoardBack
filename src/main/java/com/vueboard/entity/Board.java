@@ -1,6 +1,7 @@
 package com.vueboard.entity;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -11,7 +12,7 @@ public class Board {
    private String title;
    private String content;
    private String writerId;
-   private Date regdate;
+   private LocalDateTime  regdate;
    private int viewcnt;
    private String category;
    
