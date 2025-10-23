@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,9 +25,26 @@ public class BoardRestController {
 	private final BoardMapper boardMapper;
 
 	// 전체 게시글 목록
+//	@GetMapping("/list")
+//	public List<Board> getAllBoards() {
+//		return boardService.getAllBoards();
+//	}
+	// 페이징 처리(10개씩)
 	@GetMapping("/list")
-	public List<Board> getAllBoards() {
-		return boardService.getAllBoards();
+	public Map<String, Object> getBoards(
+	        @RequestParam(defaultValue = "1") int page,
+	        @RequestParam(defaultValue = "10") int size) {
+
+	    int offset = (page - 1) * size;
+
+	    List<Board> boards = boardService.getBoardList(offset, size);
+	    int totalCount = boardService.getTotalCount();
+
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("boards", boards);
+	    result.put("totalCount", totalCount);
+
+	    return result;
 	}
 
 	// 특정 게시글 조회
@@ -59,4 +78,6 @@ public class BoardRestController {
 		int result = boardService.deleteBoard(boardId);
 		return result > 0 ? "success" : "fail";
 	}
+	
+
 }

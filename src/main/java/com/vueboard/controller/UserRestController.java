@@ -1,7 +1,7 @@
 package com.vueboard.controller;
 
 import com.vueboard.entity.User;
-import com.vueboard.service.userService;
+import com.vueboard.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true") // Vue 포트 허용(Nuxt vue용)
 public class UserRestController {
 
-	private final userService userService;
+	private final UserService userService;
 
 	@PostMapping("/login")
     public Map<String, Object> login(@RequestBody Map<String, String> req, HttpSession session) {

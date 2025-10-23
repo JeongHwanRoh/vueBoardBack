@@ -17,11 +17,22 @@ public class BoardService {
 
 	private final BoardMapper boardMapper;
 
-	// 전체 게시글 목록
-	public List<Board> getAllBoards() {
-
-		return boardMapper.getAllBoards();
+	// 페이징 처리된 게시물 조회(10개씩)
+	public List<Board> getBoardList(int offset, int size) {
+		
+		return boardMapper.selectBoardsByPage(offset,size);
+		
 	}
+	
+	// 전체 게시물 조회
+	public int getTotalCount() {
+		
+		return boardMapper.selectTotalCount();
+	}
+//	public List<Board> getAllBoards() {
+//
+//		return boardMapper.getAllBoards();
+//	}
 
 	// 특정 게시글 조회
 	public Board getBoardById(long boardId) {

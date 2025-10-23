@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class userService {
+public class UserService {
 	
 	private final UserMapper userMapper;
 	
