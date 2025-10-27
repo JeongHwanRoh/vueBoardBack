@@ -1,5 +1,7 @@
 package com.vueboard.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -21,10 +23,12 @@ public class ChatController {
 	private  ChatService chatService; 
 	
 	@MessageMapping("/send") // 클라이언트 -> 서버
-	@SendTo("topic/messages") // 서버 -> 구독자
+	@SendTo("/topic/messages") // 서버 -> 구독자
 	public ChatMessage handleChat(ChatMessage message) {
-		
-		chatService.saveMessage(message);
+		// db 저장 전 sendtime 수동 세팅
+	    message.setSendtime(LocalDateTime.now());
+		 chatService.saveMessage(message);
+		System.out.println("💬 Received message: " + message);
 		return message;
 	}
 	
