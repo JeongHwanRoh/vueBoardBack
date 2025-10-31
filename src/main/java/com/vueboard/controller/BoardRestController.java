@@ -35,13 +35,13 @@ public class BoardRestController {
 	        @RequestParam(defaultValue = "1") int page,
 	        @RequestParam(defaultValue = "10") int size) {
 
-	    int offset = (page - 1) * size;
+	    int offset = (page - 1) * size; // 각 페이지 시작점
 
-	    List<Board> boards = boardService.getBoardList(offset, size);
-	    int totalCount = boardService.getTotalCount();
+	    List<Board> boards = boardService.getBoardList(offset, size); // 해당 페이지의 게시물 목록
+	    int totalCount = boardService.getTotalCount(); // 전체 게시물 수
 
 	    Map<String, Object> result = new HashMap<>();
-	    result.put("boards", boards);
+	    result.put("boards", boards); 
 	    result.put("totalCount", totalCount);
 
 	    return result;

@@ -24,7 +24,7 @@ public class BoardService {
 		
 	}
 	
-	// 전체 게시물 조회
+	// 전체 게시물 수 구하기
 	public int getTotalCount() {
 		
 		return boardMapper.selectTotalCount();
